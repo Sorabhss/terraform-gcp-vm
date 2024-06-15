@@ -1,7 +1,7 @@
 folder('GCP') {
     pipelineJob('Dev Pipeline Job') {
         triggers {
-            githubPush(branch: 'main')// Trigger on GitHub push events
+            githubPush('main')// Trigger on GitHub push events
         }
         definition {
             cpsScm {
@@ -36,7 +36,7 @@ folder('GCP') {
 
     pipelineJob('Master Pipeline Job') {
         githubPush{
-                githubPush(branch: 'master')
+                githubPush('master')
             }
         definition {
             cpsScm {
