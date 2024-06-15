@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+            githubPush() // Trigger on GitHub push events
+    }
+
     environment {
         TF_VAR_environment = 'prod'
     }
