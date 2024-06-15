@@ -26,7 +26,7 @@ provider "google-beta" {
   project     = var.gcp_project
 }
 
-# Get the existing network subnet
+# Get the existing network subnetss
 data "google_compute_subnetwork" "test" {
   name   = "default"
   region = var.gcp_region
