@@ -1,34 +1,48 @@
-import javaposse.jobdsl.dsl.DslFactory
-
-def folderName = 'MyGCP'
-
-folder(folderName) {
-    DslFactory dslFactory = new DslFactory()
-    dslFactory.setUseJobDslPlugin(true)
-
-    def jobs = [
-        'Dev Pipeline Job': ['main', 'Jenkinsfile'],
-        'Release Job': ['main', 'release.Jenkinsfile'],
-        'Master Pipeline Job': ['master', 'master.Jenkinsfile']
-    ]
-
-    jobs.each { jobName, scriptInfo ->
-        def branch = scriptInfo[0]
-        def scriptPath = scriptInfo[1]
-
-        dslFactory.pipelineJob(jobName) {
-            definition {
-                cpsScm {
-                    scm {
-                        git {
-                            remote {
-                                url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                                branch(branch)
-                            }
+folder('GCP') {
+    pipelineJob('Dev Pipeline Job') {
+        definition {
+            cpsScm {
+                scm {
+                    git {
+                        remote {
+                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                            branch('main')
                         }
                     }
-                    scriptPath(scriptPath)
                 }
+                scriptPath('Jenkinsfile')
+            }
+        }
+    }
+
+    pipelineJob('Release Job') {
+        definition {
+            cpsScm {
+                scm {
+                    git {
+                        remote {
+                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                            branch('main')
+                        }
+                    }
+                }
+                scriptPath('release.Jenkinsfile')
+            }
+        }
+    }
+
+    pipelineJob('Master Pipeline Job') {
+        definition {
+            cpsScm {
+                scm {
+                    git {
+                        remote {
+                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                            branch('master')
+                        }
+                    }
+                }
+                scriptPath('master.Jenkinsfile')
             }
         }
     }
