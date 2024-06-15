@@ -1,5 +1,4 @@
-import javaposse.jobdsl.dsl.Job
-Job folder = folder('TerraformGcp') {
+folder('TerraformGCP') {
     pipelineJob('Dev Pipeline Job') {
         definition {
             cpsScm {
