@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_USERNAME = credentials('github-credentials').username
-        GIT_TOKEN = credentials('github-credentials').password
+        GIT_USERNAME = credentials('github-token').username
+        GIT_TOKEN = credentials('github-token').password
     }
 
     stages {
