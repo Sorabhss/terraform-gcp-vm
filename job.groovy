@@ -13,7 +13,7 @@ folder('GCP') {
                 scriptPath('Jenkinsfile')
             }
         }
-    }.moveInto('GCP')
+    }.moveInto(this)
 
     pipelineJob('Release Job') {
         definition {
@@ -29,7 +29,7 @@ folder('GCP') {
                 scriptPath('release.Jenkinsfile')
             }
         }
-    }.moveInto('GCP')
+    }.moveInto(this)
 
     pipelineJob('Master Pipeline Job') {
         definition {
@@ -45,5 +45,5 @@ folder('GCP') {
                 scriptPath('master.Jenkinsfile')
             }
         }
-    }.moveInto('GCP')
+    }.moveInto(this)
 }
