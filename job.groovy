@@ -1,6 +1,4 @@
-import org.jenkinsci.plugins.workflow.cps.global.NonCPS
-
-pipelineJob('TerraformTesting') {
+pipelineJob('Application Pipeline') {
     definition {
         cpsScm {
             scm {
@@ -16,7 +14,6 @@ pipelineJob('TerraformTesting') {
     }
 }
 
-@NonCPS
 def createJobs() {
     // Define the folder name
     def folderName = 'Your Application Name'
