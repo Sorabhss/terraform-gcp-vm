@@ -1,8 +1,4 @@
-
-
-@NonCPS
-def createJobs() {
-   pipelineJob('Dev Pipeline Job') {
+pipelineJob('Dev Pipeline Job') {
     definition {
         cpsScm {
             scm {
@@ -49,6 +45,20 @@ pipelineJob('Master Pipeline Job') {
         }
     }
 }
+
+@NonCPS
+def createJobs() {
+    pipelineJob('Dev Pipeline Job') {
+        // Job definition here
+    }
+
+    pipelineJob('Release Job') {
+        // Job definition here
+    }
+
+    pipelineJob('Master Pipeline Job') {
+        // Job definition here
+    }
 }
 
 createJobs()
