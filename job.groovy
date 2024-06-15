@@ -1,4 +1,8 @@
-pipelineJob('Dev Pipeline Job') {
+
+
+@NonCPS
+def createJobs() {
+   pipelineJob('Dev Pipeline Job') {
     definition {
         cpsScm {
             scm {
@@ -45,5 +49,6 @@ pipelineJob('Master Pipeline Job') {
         }
     }
 }
+}
 
-scriptApproval('method groovy.lang.Object wait()') 
+createJobs()
