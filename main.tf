@@ -20,7 +20,7 @@ provider "google" {
   project     = var.gcp_project
 }
 
-# Define the Google Cloud Provider with beta features
+# Define the Google Cloud Provider with beta featuresss
 provider "google-beta" {
   credentials = file("./keys/gcp-service-account.example.json")
   project     = var.gcp_project
