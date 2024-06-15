@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_USERNAME = credentials('github-credentials').username
+        GIT_TOKEN = credentials('github-credentials').password
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +15,7 @@ pipeline {
         stage('Merge to Master') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-token', passwordVariable: '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', usernameVariable: 'Sorabhss')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github-token', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
                         sh 'git config user.email "salokhesourabh09@gmail.com"'
                         sh 'git config user.name "Sorabhss"'
                         sh 'git checkout master'
