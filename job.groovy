@@ -13,6 +13,17 @@ folder('GCP') {
                 scriptPath('Jenkinsfile')
             }
         }
+        triggers {
+            changeset {
+                scm('git') {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        credentials('git-tokens')
+                    }
+                    target('main')
+                }
+            }
+        }
     }
 
     pipelineJob('Release Job') {
@@ -29,6 +40,7 @@ folder('GCP') {
                 scriptPath('release.Jenkinsfile')
             }
         }
+        
     }
 
     pipelineJob('Master Pipeline Job') {
@@ -43,6 +55,17 @@ folder('GCP') {
                     }
                 }
                 scriptPath('master.Jenkinsfile')
+            }
+        }
+        triggers {
+            changeset {
+                scm('git') {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        credentials('git-tokens')
+                    }
+                    target('master')
+                }
             }
         }
     }

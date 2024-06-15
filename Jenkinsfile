@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    triggers {
-        githubPush()  // Listen for GitHub push events
-    }
     stages {
         stage('Checkout') {
             steps {
