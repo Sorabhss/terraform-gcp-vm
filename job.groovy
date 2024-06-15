@@ -14,15 +14,9 @@ folder('GCP') {
             }
         }
         triggers {
-            changeset {
-                scm('git') {
-                    remote {
-                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                        credentials('git-tokens')
-                    }
-                    target('main')
-                }
-            }
+            githubPush(branches: [
+                githubBranchSpec(branchName: 'main')
+            ])
         }
     }
 
@@ -57,16 +51,10 @@ folder('GCP') {
                 scriptPath('master.Jenkinsfile')
             }
         }
-        triggers {
-            changeset {
-                scm('git') {
-                    remote {
-                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                        credentials('git-tokens')
-                    }
-                    target('master')
-                }
-            }
+      triggers {
+            githubPush(branches: [
+                githubBranchSpec(branchName: 'master')
+            ])
         }
     }
 }
