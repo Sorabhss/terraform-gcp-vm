@@ -6,7 +6,6 @@ folder('GCP') {
                     git {
                         remote {
                             url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            credentials('gcpcred')
                             branch('main')
                         }
                     }
