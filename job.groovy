@@ -1,5 +1,7 @@
-folder('GCP') {
-    pipelineJob('Dev Pipeline Job') {
+def folderName = 'GCP'
+
+folder(folderName) {
+    def devJob = pipelineJob('Dev Pipeline Job') {
         definition {
             cpsScm {
                 scm {
@@ -13,9 +15,9 @@ folder('GCP') {
                 scriptPath('Jenkinsfile')
             }
         }
-    }.moveInto(this)
+    }
 
-    pipelineJob('Release Job') {
+    def releaseJob = pipelineJob('Release Job') {
         definition {
             cpsScm {
                 scm {
@@ -29,9 +31,9 @@ folder('GCP') {
                 scriptPath('release.Jenkinsfile')
             }
         }
-    }.moveInto(this)
+    }
 
-    pipelineJob('Master Pipeline Job') {
+    def masterJob = pipelineJob('Master Pipeline Job') {
         definition {
             cpsScm {
                 scm {
@@ -45,5 +47,9 @@ folder('GCP') {
                 scriptPath('master.Jenkinsfile')
             }
         }
-    }.moveInto(this)
+    }
+
+    devJob.addTo(this)
+    releaseJob.addTo(this)
+    masterJob.addTo(this)
 }
