@@ -10,14 +10,11 @@ pipeline {
         stage('Merge to Master') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
-                        sh 'git config user.email "salokhesourabh09@gmail.com"'
-                        sh 'git config user.name "Sorabhss"'
-                        sh 'git checkout master'
-                        sh 'git merge origin/main'
-                        sh 'git remote set-url origin https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/Sorabhss/terraform-gcp-vm.git'
-                        sh 'git push origin master'
-                    }
+                    sh 'git config user.email "salokhesourabh09@gmail.com"'
+                    sh 'git config user.name "Sorabhss"'
+                    sh 'git checkout master'
+                    sh 'git merge origin/main'
+                    sh 'git push origin master'
                 }
             }
         }
