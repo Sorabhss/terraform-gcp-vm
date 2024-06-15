@@ -1,49 +1,50 @@
-folder('GCP') {
-    pipelineJob('Dev Pipeline Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('main')
-                        }
-                    }
-                }
-                scriptPath('Jenkinsfile')
-            }
-        }
-    }
+def folderName = 'GCP'
+def folderPath = folderName
 
-    pipelineJob('Release Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('main')
-                        }
+pipelineJob('Dev Pipeline Job') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        branch('main')
                     }
                 }
-                scriptPath('release.Jenkinsfile')
             }
+            scriptPath('Jenkinsfile')
         }
     }
+}.addToFolder(folderPath)
 
-    pipelineJob('Master Pipeline Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('master')
-                        }
+pipelineJob('Release Job') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        branch('main')
                     }
                 }
-                scriptPath('master.Jenkinsfile')
             }
+            scriptPath('release.Jenkinsfile')
         }
     }
-}.addTo(jenkins.model.Jenkins.instance.getItemByFullName('GCP'))
+}.addToFolder(folderPath)
+
+pipelineJob('Master Pipeline Job') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        branch('master')
+                    }
+                }
+            }
+            scriptPath('master.Jenkinsfile')
+        }
+    }
+}.addToFolder(folderPath)
