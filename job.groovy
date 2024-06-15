@@ -44,9 +44,6 @@ pipelineJob('GCP/Release Pipeline Job') {
             }
         }
     }
-    triggers {
-        githubPush()
-    }
 }
 
 // Master Pipeline Job
@@ -66,8 +63,5 @@ pipelineJob('GCP/Master Pipeline Job') {
                 }
             }
         }
-    }
-    triggers {
-        githubPush()
     }
 }
