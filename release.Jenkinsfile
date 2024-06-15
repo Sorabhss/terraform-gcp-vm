@@ -10,7 +10,7 @@ pipeline {
         stage('Merge to Master') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-token')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github-token', passwordVariable: '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', usernameVariable: 'Sorabhss')]) {
                         sh 'git config user.email "salokhesourabh09@gmail.com"'
                         sh 'git config user.name "Sorabhss"'
                         sh 'git checkout master'
