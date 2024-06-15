@@ -1,31 +1,45 @@
 pipeline {
-    agent {
-        docker {
-            image 'hashicorp/terraform:latest'
-        }
-    }
+    agent any
+	
     environment {
-        TF_CLI_ARGS = "-input=false"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
+	    GIT_TOKEN = credentials('git-token')
     }
+	
     stages {
-        stage('Checkout') {
+        stage('Git Checkout') {
             steps {
-                checkout scm
+               git "https://${GIT_TOKEN}@github.com/Sorabhss/terraform-gcp-vm.git"
             }
         }
+        
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                script {
+                    sh 'terraform init'
+                }
             }
         }
+        
         stage('Terraform Plan') {
             steps {
-                sh 'terraform plan'
+                script {
+                    sh 'terraform plan -out=tfplan'
+                }
             }
         }
-        stage('Trigger Master Pipeline') {
+
+	    stage('Manual Approval') {
             steps {
-                build job: 'Master Pipeline Job', wait: false
+                input "Approve?"
+            }
+        }
+	    
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh 'terraform apply tfplan'
+                }
             }
         }
     }
