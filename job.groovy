@@ -15,9 +15,6 @@ folder('GCP') {
         }
         triggers {
             githubPush()
-            when {
-            branch('main')
-           }
         }
     }
 
@@ -54,9 +51,6 @@ folder('GCP') {
         }
       triggers {
             githubPush()
-            when {
-            branch('master')
-           }
         }
     }
 }
