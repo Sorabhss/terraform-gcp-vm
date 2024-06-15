@@ -14,9 +14,10 @@ folder('GCP') {
             }
         }
         triggers {
-            githubPush(branches: [
-                githubBranchSpec(branchName: 'main')
-            ])
+            githubPush()
+            when {
+            branch('main')
+           }
         }
     }
 
@@ -52,9 +53,10 @@ folder('GCP') {
             }
         }
       triggers {
-            githubPush(branches: [
-                githubBranchSpec(branchName: 'master')
-            ])
+            githubPush()
+            when {
+            branch('master')
+           }
         }
     }
 }
