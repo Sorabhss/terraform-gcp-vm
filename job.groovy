@@ -1,4 +1,4 @@
-folder('TerraformGCP') {
+folder('TestFoldder') {
     pipelineJob('Dev Pipeline Job') {
         definition {
             cpsScm {
