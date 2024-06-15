@@ -1,7 +1,5 @@
-def folderName = 'GCP'
-
-folder(folderName) {
-    def devJob = pipelineJob('Dev Pipeline Job') {
+folder('GCP') {
+    pipelineJob('Dev Pipeline Job') {
         definition {
             cpsScm {
                 scm {
@@ -17,7 +15,7 @@ folder(folderName) {
         }
     }
 
-    def releaseJob = pipelineJob('Release Job') {
+    pipelineJob('Release Job') {
         definition {
             cpsScm {
                 scm {
@@ -33,7 +31,7 @@ folder(folderName) {
         }
     }
 
-    def masterJob = pipelineJob('Master Pipeline Job') {
+    pipelineJob('Master Pipeline Job') {
         definition {
             cpsScm {
                 scm {
@@ -48,8 +46,4 @@ folder(folderName) {
             }
         }
     }
-
-    devJob.addTo(this)
-    releaseJob.addTo(this)
-    masterJob.addTo(this)
-}
+}.addTo(jenkins.model.Jenkins.instance.getItemByFullName('GCP'))
