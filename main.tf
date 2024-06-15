@@ -14,7 +14,7 @@ terraform {
   required_version = ">= 0.13"
 }
 
-# Define the Google Cloud Providers
+# Define the Google Cloud Provider
 provider "google" {
   credentials = file("./keys/gcp-service-account.example.json")
   project     = var.gcp_project
