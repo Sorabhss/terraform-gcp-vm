@@ -45,3 +45,5 @@ pipelineJob('Master Pipeline Job') {
         }
     }
 }
+
+scriptApproval('method groovy.lang.Object wait()') 
