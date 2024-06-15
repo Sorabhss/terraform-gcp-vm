@@ -3,16 +3,14 @@ pipeline {
 	
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
-	    GIT_TOKEN = credentials('git-token')
     }
 	
     stages {
-        stage('Git Checkout') {
+        stage('Checkout') {
             steps {
-               git "https://${GIT_TOKEN}@github.com/Sorabhss/terraform-gcp-vm.git"
+                checkout scm
             }
         }
-        
         stage('Terraform Init') {
             steps {
                 script {
