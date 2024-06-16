@@ -119,6 +119,11 @@ resource "google_compute_instance" "instance" {
   # defined as a label (see above).
   tags = var.gcp_network_tags
 
+   timeouts {
+    create = "30m"
+    delete = "30m"
+  }
+
 }
 
 # Create a DNS record
