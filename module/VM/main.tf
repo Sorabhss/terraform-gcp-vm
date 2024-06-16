@@ -102,7 +102,7 @@ resource "google_compute_instance" "instance" {
   #   sshKeys = "ubuntu:${file("keys/${var.ssh_public_key}.pub")}"
   # }
 
-  # Execute the script to format & mount /var/opt
+  # Execute the script to format & mount /var/opts
   metadata = {
     startup-script = var.disk_storage_enabled ? file("${path.module}/init/mnt_dir.sh") : null
     MOUNT_DIR      = var.disk_storage_mount_path
