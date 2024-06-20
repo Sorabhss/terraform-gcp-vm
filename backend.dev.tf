@@ -1,7 +1,4 @@
-terraform {
-  backend "gcs" {
-    bucket = "gcp_terraform_backend"
-    prefix = "tfstate"
+
+bucket = "gcp_terraform_backend"
+prefix = "tfstate"
     
-  }
-}
