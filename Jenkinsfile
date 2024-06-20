@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def backendConfigFile = "backend.${env.ENV}.tf"
-                    // Read the backend configuration from the file
+                    // Read the backend configuration from the filesss
                     def backendConfig = readFile(file: backendConfigFile)
                     // Split the configuration into lines and construct the init command
                     def backendConfigLines = backendConfig.split('\n')
