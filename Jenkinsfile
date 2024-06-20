@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-credentials')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -9,11 +12,13 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 script {
-                    sh 'terraform init'
+                    // Set GOOGLE_APPLICATION_CREDENTIALS environment variable for Terraform
+                    withCredentials([file(credentialsId: 'gcp-credentials', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                        sh 'terraform init -backend-config=backend.dev.tf'
+                    }
                 }
             }
         }
-        
         stage('Terraform Plan') {
             steps {
                 script {
@@ -21,13 +26,11 @@ pipeline {
                 }
             }
         }
-
-	    stage('Manual Approval') {
+        stage('Manual Approval') {
             steps {
                 input "Approve?"
             }
         }
-	    
         stage('Terraform Apply') {
             steps {
                 script {

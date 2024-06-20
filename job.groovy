@@ -13,7 +13,6 @@ pipelineJob('GCP/Dev Pipeline Job') {
                 git {
                     remote {
                         url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                        credentials('git-credentials-id')
                     }
                     branches('*/main')
                     scriptPath('Jenkinsfile')

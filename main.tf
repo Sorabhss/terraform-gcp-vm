@@ -21,13 +21,13 @@ data "google_compute_image" "debian" {
 
 # Define the Google Cloud Provider
 provider "google" {
-  credentials = file("./keys/gcp-service-account.example.json")
+  #credentials = file("./keys/gcp-service-account.example.json")
   project     = var.gcp_project
 }
 
 # Define the Google Cloud Provider with beta features
 provider "google-beta" {
-  credentials = file("./keys/gcp-service-account.example.json")
+  #credentials = file("./keys/gcp-service-account.example.json")
   project     = var.gcp_project
 }
 
