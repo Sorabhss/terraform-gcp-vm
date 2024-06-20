@@ -1,48 +1,65 @@
 folder('GCP') {
-    pipelineJob('Dev Pipeline Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('main')
-                        }
+    displayName('GCP Pipelines')
+    description('Folder containing all GCP related pipeline jobs')
+}
+
+// Dev Pipeline Job
+pipelineJob('GCP/Dev Pipeline Job') {
+    displayName('Dev Pipeline Job')
+    description('Pipeline job for the development branch')
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
                     }
+                    branches('*/main')
+                    scriptPath('Jenkinsfile')
                 }
-                scriptPath('Jenkinsfile')
             }
         }
     }
+    triggers {
+        githubPush()
+    }
+}
 
-    pipelineJob('Release Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('main')
-                        }
+// Release Pipeline Job
+pipelineJob('GCP/Release Pipeline Job') {
+    displayName('Release Pipeline Job')
+    description('Pipeline job for the release branch')
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        credentials('git-credentials-id')
                     }
+                    branches('*/main')
+                    scriptPath('release.Jenkinsfile')
                 }
-                scriptPath('release.Jenkinsfile')
             }
         }
     }
+}
 
-    pipelineJob('Master Pipeline Job') {
-        definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote {
-                            url('https://github.com/Sorabhss/terraform-gcp-vm.git')
-                            branch('master')
-                        }
+// Master Pipeline Job
+pipelineJob('GCP/Master Pipeline Job') {
+    displayName('Master Pipeline Job')
+    description('Pipeline job for the master branch')
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/Sorabhss/terraform-gcp-vm.git')
+                        credentials('git-credentials-id')
                     }
+                    branches('*/master')
+                    scriptPath('master.Jenkinsfile')
                 }
-                scriptPath('master.Jenkinsfile')
             }
         }
     }
