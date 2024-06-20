@@ -18,7 +18,7 @@ pipeline {
         stage('Determine Environment') {
             steps {
                 script {
-                    // Automatically determine the environment based on the branch name
+                    // Automatically determine the environment based on the branch names
                     if (env.BRANCH_NAME == 'main') {
                         env.ENV = 'dev'
                     } else if (env.BRANCH_NAME == 'staging') {
