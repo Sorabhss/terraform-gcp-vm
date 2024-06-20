@@ -10,11 +10,18 @@ pipeline {
         stage('Merge to Master') {
             steps {
                 script {
+                    // Set Git configuration
                     sh 'git config user.email "salokhesourabh09@gmail.com"'
                     sh 'git config user.name "Sorabhss"'
+
+                    // Checkout and merge the main branch into master
                     sh 'git checkout master'
                     sh 'git merge origin/main'
-                    sh 'git push origin master'
+
+                    // Push the changes to GitHub
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                        sh "git push https://Sorabhss:${GITHUB_TOKEN}@github.com/Sorabhss/terraform-gcp-vm.git master"
+                    }
                 }
             }
         }
