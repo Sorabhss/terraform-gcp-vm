@@ -49,9 +49,9 @@ pipeline {
                         }
                     }
                     // Set GOOGLE_APPLICATION_CREDENTIALS environment variable for Terraform
-                    withCredentials([file(credentialsId: 'gcp-credentials', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    withCredentials([file(credentialsId: 'gcp-credentials', variable: 'GCP_CREDS')]) {
                         sh """
-                           export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+                           export GOOGLE_APPLICATION_CREDENTIALS=\$GCP_CREDS
                            ${initCommand}
                         """
                     }
