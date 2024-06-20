@@ -4,6 +4,17 @@ pipeline {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-credentials')
     }
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                    // Extract the branch name from the SCM context
+                    def scmVars = checkout scm
+                    env.BRANCH_NAME = scmVars.GIT_BRANCH.replaceFirst(/^origin\//, '')
+                    echo "Checked out branch: ${env.BRANCH_NAME}"
+                }
+            }
+        }
         stage('Determine Environment') {
             steps {
                 script {
@@ -18,11 +29,6 @@ pipeline {
                         error "Unsupported branch: ${env.BRANCH_NAME}"
                     }
                 }
-            }
-        }
-        stage('Checkout') {
-            steps {
-                checkout scm
             }
         }
         stage('Terraform Init') {
