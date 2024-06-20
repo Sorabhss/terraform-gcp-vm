@@ -10,6 +10,7 @@ pipeline {
         stage('Merge to Master') {
             steps {
                 script {
+                    //script
                     // Set Git configuration
                     sh 'git config user.email "salokhesourabh09@gmail.com"'
                     sh 'git config user.name "Sorabhss"'
